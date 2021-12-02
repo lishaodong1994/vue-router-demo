@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 视口大小，device-width：设备宽度（最佳视口宽度 如6s是375px）   initial-scale=1.0 表示缩放比例为1-->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <!-- icon文件可以放在public下,在index里进行引用，这样全局就可以使用到相应的icon,也可直接使用vant组件内置的 -->
+    <!-- <link rel="stylesheet" href="/iconfont/iconfont.css"> -->
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <script>
+    //iphone6s  window.devicePixelRatio = 2   简称DPR  css像素和手机物理像素比 1个css像素等于2个手机物理像素 
+    //即375px就占满iphone6s手机750px的分辨率
+    //document.documentElement.clientWidth  拿到的就是设备宽度(最佳视口宽度 6s 375px)
+    // rem回顾： [rem的html节点的fontSize大小。如html的fontSize=100px，则 1rem =100px]
+    // 思路：移动端只有一个尺寸的设计稿（一般为750px的）但是我们需要适配多个手机屏幕。我们可以通过设置不同的rem的大小来满足。
+    // 小的设备rem的值按比例给小，大的按比例给大。
+    // fontSize计算公式：
+    //document.documentElement.style.fontSize=document.documentElement.clientWidth / 设计稿宽度 * 根节点的fontSize+'px'  
+    //若根节点字体大小不为100则如16px 那么1rem=16px，假设从设计稿量取尺寸210px那么转换为rem则为 210/16=13.125计算起来十分困难！
+    //最好就设为100好算，非要其他的数也可以下载一个插件px to rem 在配置里面设好根节点字体基准，这样就能自动换算了。
+    document.documentElement.style.fontSize=document.documentElement.clientWidth/375*100+'px'//查照了原网页（相当于是一个375px的设计稿）
+  </script>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
